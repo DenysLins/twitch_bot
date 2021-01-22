@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/DenysLins/twitch_bot/issues"
   },
-  "homepage": "https://github.com/DenysLins/twitch_bot#readme"
+  "homepage": "https://github.com/DenysLins/twitch_bot#readme",
+  "dependencies": {
+    "tmi.js": "^1.7.1"
+  }
 }
