@@ -4,15 +4,17 @@ const commands = require("./commands.js");
 
 // Define configuration options
 const opts = {
+  options: { debug: true, messagesLogLevel: "info" },
+  connection: {
+    reconnect: true,
+    secure: true,
+  },
   identity: {
     username: process.env.BOT_USERNAME,
     password: process.env.OAUTH_TOKEN,
   },
   channels: [process.env.CHANNEL_NAME],
 };
-
-console.log(process.env.BOT_USERNAME);
-console.log(process.env.CHANNEL_NAME);
 
 // Load environment variables
 dotenv.config();
