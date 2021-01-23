@@ -1,4 +1,7 @@
 const tmi = require("tmi.js");
+const dotenv = require("dotenv");
+
+const commands = require("./commands.js");
 
 // Define configuration options
 const opts = {
@@ -8,6 +11,9 @@ const opts = {
   },
   channels: [process.env.CHANNEL_NAME],
 };
+
+// Load environment variables
+dotenv.config();
 
 // Create a client with our options
 const client = new tmi.client(opts);
@@ -26,25 +32,14 @@ function onMessageHandler(target, context, msg, self) {
   } // Ignore messages from the bot
 
   // Remove whitespace from chat message
-  const commandName = msg.trim();
+  const commandName = msg.trim().toLowerCase();
 
   // If the command is known, let's execute it
-  if (commandName === "!d20") {
-    const num = rollDice(commandName);
-    client.say(
-      target,
-      `You rolled a ${num}. Link: https://glitch.com/~twitch-chatbot`
-    );
-    console.log(`* Executed ${commandName} command`);
+  if (commandName === "!dice") {
+    commands.dice(commandName, client, target);
   } else {
     console.log(`* Unknown command ${commandName}`);
   }
-}
-
-// Function called when the "dice" command is issued
-function rollDice() {
-  const sides = 20;
-  return Math.floor(Math.random() * sides) + 1;
 }
 
 // Called every time the bot connects to Twitch chat
