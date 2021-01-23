@@ -1,6 +1,5 @@
 const tmi = require("tmi.js");
 const dotenv = require("dotenv");
-
 const commands = require("./commands.js");
 
 // Define configuration options
@@ -11,6 +10,9 @@ const opts = {
   },
   channels: [process.env.CHANNEL_NAME],
 };
+
+console.log(process.env.BOT_USERNAME);
+console.log(process.env.CHANNEL_NAME);
 
 // Load environment variables
 dotenv.config();
@@ -35,10 +37,18 @@ function onMessageHandler(target, context, msg, self) {
   const commandName = msg.trim().toLowerCase();
 
   // If the command is known, let's execute it
-  if (commandName === "!dice") {
-    commands.dice(commandName, client, target);
-  } else {
-    console.log(`* Unknown command ${commandName}`);
+  switch (commandName) {
+    case "!dice":
+      commands.dice(commandName, client, target);
+      break;
+    case "!help":
+      commands.help(commandName, client, target);
+      break;
+    case "!joke":
+      commands.joke(commandName, client, target);
+      break;
+    default:
+      commands.unknown(commandName, client, target);
   }
 }
 

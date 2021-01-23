@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/DenysLins/twitch_bot#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.7",
     "tmi.js": "^1.7.1"
